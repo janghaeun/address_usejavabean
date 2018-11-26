@@ -106,4 +106,31 @@ public class AddrBean {
         }
         return datas;
     }
+    //특정 주소록 게시글 가져오는 메서드
+    public AddrBook getDB(int id){
+        connect();
+
+        String sql = "select * from addrbook where id=?";
+        AddrBook addrbook = new AddrBook();
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,id);
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+
+            addrbook.setId(rs.getInt("id"));
+            addrbook.setName(rs.getString("name"));
+            addrbook.setEmail(rs.getString("email"));
+            addrbook.setTel(rs.getString("tel"));
+            addrbook.setCompany(rs.getString("company"));
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            disconnect();
+        }
+        return addrbook;
+    }
 }
