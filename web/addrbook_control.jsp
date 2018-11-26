@@ -21,18 +21,21 @@
 
     String action = request.getParameter("action");
 
-    if (action.equals("insert")){
+    //주소록 목록을 출력하는 addrbook_list문서로 분기
+    if (action.equals("list")) {
+
+        ArrayList<AddrBook> datalist = ad.getDBList();
+        request.setAttribute("dataset", datalist);
+        pageContext.forward("addrbook_list.jsp");
+    }
+
+    //회원 정보를 database에 입력하고 addrbook_control.jsp를 통해 addrbook_list.jsp를 출력
+    if(action.equals("insert")){
         if (ad.insertDB(addrbook)){
             out.println("<script>alert(action)</script>");
             response.sendRedirect("addrbook_control.jsp?action=list");
         }else {
-            try {
-                throw new Exception("DB ERROR");
-            } catch (Exception e) {
-
-                e.printStackTrace();
-            }
-
+            throw new Exception("DB ERROR");
         }
     }else {
         out.println("<script>alert('action 파라미터를 확인해주세요!!!')</script>");
