@@ -37,8 +37,22 @@
         }else {
             throw new Exception("DB ERROR");
         }
-    }else {
+    }//주소록 수정 페이지 요청인 경우
+    else if(action.equals("edit")){
+        AddrBook abook = ad.getDB(addrbook.getId());
+
+        if(!request.getParameter("upasswd").equals("1234")){
+            out.println("<script>alert('비밀번호가 틀렸습니다.'); history.go(-1);</script>");
+        }
+        else {
+            request.setAttribute("address",abook);
+            pageContext.forward("addrbook_edit_form.jsp");
+        }
+    }
+    else {
         out.println("<script>alert('action 파라미터를 확인해주세요!!!')</script>");
     }
+
+
 
 %>
