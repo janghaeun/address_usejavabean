@@ -58,6 +58,18 @@
             throw new Exception("DB 삭제 오류");
         }
     }
+
+    //주소록 수정 등록 요청인 경우
+
+    else if (action.equals("update")){
+        if (ad.updateDB(addrbook)){
+            response.sendRedirect("addrbook_control.jsp?action=list");
+        }
+        else {
+            throw new Exception(" DB 갱신 오류 ");
+        }
+    }
+
     else {
         out.println("<script>alert('action 파라미터를 확인해주세요!!!')</script>");
     }

@@ -106,6 +106,7 @@ public class AddrBean {
         }
         return datas;
     }
+
     //특정 주소록 게시글 가져오는 메서드
     public AddrBook getDB(int id){
         connect();
@@ -149,6 +150,29 @@ public class AddrBean {
             return false;
         }
 
+        finally {
+            disconnect();
+        }
+        return true;
+    }
+
+    public boolean updateDB (AddrBook addrBook){
+        connect();
+
+        String sql = "update addrbook set name=?, email=?, tel=? , company=? where id=?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,addrBook.getName());
+            pstmt.setString(2,addrBook.getEmail());
+            pstmt.setString(3,addrBook.getTel());
+            pstmt.setString(4,addrBook.getCompany());
+            pstmt.setInt(5,addrBook.getId());
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
         finally {
             disconnect();
         }
