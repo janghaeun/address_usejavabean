@@ -56,7 +56,7 @@
                     <td colspan="2" align="center">
                         <input type="submit" value="저장">
                         <input type="reset" value="취소">
-                        <input type="button" value="삭제"onclick="delcheck()">
+                        <input type="button" value="삭제" onclick="delcheck()">
                     </td>
                 </tr>
             </table>
