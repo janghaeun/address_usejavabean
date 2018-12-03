@@ -133,4 +133,25 @@ public class AddrBean {
         }
         return addrbook;
     }
+
+    //특정 주소록 게시글 삭제 메서드
+    public boolean deleteDB(int id){
+        connect();
+
+        String sql = "delete from addrbook where id=?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,id);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+
+        finally {
+            disconnect();
+        }
+        return true;
+    }
 }

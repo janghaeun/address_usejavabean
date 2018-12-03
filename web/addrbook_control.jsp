@@ -49,6 +49,15 @@
             pageContext.forward("addrbook_edit_form.jsp");
         }
     }
+
+    // 주소록 삭제 요청일 경우
+    else if (action.equals("delete")){
+        if (ad.deleteDB(addrbook.getId())){
+            response.sendRedirect("addrbook_control.jsp?action=list");
+        }else {
+            throw new Exception("DB 삭제 오류");
+        }
+    }
     else {
         out.println("<script>alert('action 파라미터를 확인해주세요!!!')</script>");
     }
